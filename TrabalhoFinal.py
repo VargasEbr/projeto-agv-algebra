@@ -9,8 +9,6 @@ import os
 import time
 from fpdf import FPDF
 
-pio.kaleido.scope.mathjax = None
-
 #configsPag
 
 st.set_page_config(
@@ -670,6 +668,9 @@ elif menu == "📄 Relatório Final":
         fig_mapa_completo.update_yaxes(showgrid=True, gridcolor="lightgray", zerolinecolor="black")
         
         try:
+            # MOVIDO: Só desativa o mathjax no exato momento que precisa gerar o PDF!
+            pio.kaleido.scope.mathjax = None
+            
             with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as tmpfile:
                 fig_mapa_completo.write_image(tmpfile.name, engine="kaleido", width=900, height=450)
                 time.sleep(0.5) 
