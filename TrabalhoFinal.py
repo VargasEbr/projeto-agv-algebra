@@ -2,10 +2,14 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
+import plotly.io as pio
 import math
 import tempfile
 import os
+import time
 from fpdf import FPDF
+
+pio.kaleido.scope.mathjax = None
 
 #configsPag
 
@@ -668,6 +672,7 @@ elif menu == "📄 Relatório Final":
         try:
             with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as tmpfile:
                 fig_mapa_completo.write_image(tmpfile.name, engine="kaleido", width=900, height=450)
+                time.sleep(0.5) 
                 pdf.image(tmpfile.name, x=10, w=190)
             os.remove(tmpfile.name) # Limpar arquivo temporário
         except Exception as e:
