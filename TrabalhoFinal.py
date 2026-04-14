@@ -676,11 +676,11 @@ elif menu == "📄 Relatório Final":
                 time.sleep(0.5) 
                 pdf.image(tmpfile.name, x=10, w=190)
             os.remove(tmpfile.name) # Limpar arquivo temporário
-        #except Exception as e:
-            #pdf.set_font('Arial', 'I', 10)
-            #pdf.set_text_color(150, 150, 150)
-            #pdf.cell(0, 10, s_pdf("(Não foi possível gerar a imagem do gráfico. Certifique-se de instalar 'kaleido')"), 0, 1)
-            #pdf.set_text_color(0, 0, 0)
+        except Exception as e:
+            pdf.set_font('Arial', 'I', 10)
+            pdf.set_text_color(150, 150, 150)
+            pdf.cell(0, 10, s_pdf("(Não foi possível gerar a imagem do gráfico. Certifique-se de instalar 'kaleido')"), 0, 1)
+            pdf.set_text_color(0, 0, 0)
             
         raw = pdf.output(dest='S')
         return bytes(raw) if isinstance(raw, (bytes, bytearray)) else raw.encode('latin-1')
